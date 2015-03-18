@@ -109,6 +109,7 @@
     <None Include="Assets\EasyRoads3D\Shaders\EasyRoads3D-Surface alpha.shader" />
     <None Include="Assets\EasyRoads3D\Shaders\EasyRoads3D-Surface.shader" />
     <None Include="Assets\EasyRoads3D\Unity 5\Release Notes - Unity 5 beta.txt" />
+    <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
