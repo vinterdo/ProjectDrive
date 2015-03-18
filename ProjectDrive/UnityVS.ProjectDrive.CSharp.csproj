@@ -68,6 +68,11 @@
     <Compile Include="Assets\EasyRoads3D\scripts\RoadObjectScript.cs" />
     <Compile Include="Assets\EasyRoads3D\scripts\SurfaceScript.cs" />
     <Compile Include="Assets\EasyRoads3D\scripts\sideObjectScript.cs" />
+    <Compile Include="Assets\Scripts\AIPath.cs" />
+    <Compile Include="Assets\Scripts\CameraPositioner.cs" />
+    <Compile Include="Assets\Scripts\Vehicle.cs" />
+    <Compile Include="Assets\Scripts\VehicleAIController.cs" />
+    <Compile Include="Assets\Scripts\VehiclePlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\EasyRoads3D\_Readme.txt" />
