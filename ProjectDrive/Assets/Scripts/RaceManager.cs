@@ -37,7 +37,7 @@ public class RaceManager : MonoBehaviour
 
         foreach (GameObject V in Vehicles)
         {
-            if (Vector3.Distance(V.transform.position, Checkpoints[V].transform.position) > MaxDistFromCheckpoint)
+            if (Vector3.Distance(V.transform.position, Checkpoints[V].transform.position) > 2 * MaxDistFromCheckpoint)
             {
                 V.transform.position = Checkpoints[V].transform.position;
             }
@@ -89,14 +89,14 @@ public class RaceManager : MonoBehaviour
 	{
 		int index = Array.IndexOf(PathObject.GetComponentsInChildren<Transform>(), Checkpoint.transform);
 		Transform[] path = PathObject.GetComponentsInChildren<Transform>();
-		return path[Mathf.Clamp(index + 1,0, path.Length)].gameObject;
+		return path[Mathf.Clamp(index + 1,0, path.Length - 1)].gameObject;
 	}
 
     public GameObject GetPrivCheckpoint(GameObject Checkpoint)
     {
         int index = Array.IndexOf(PathObject.GetComponentsInChildren<Transform>(), Checkpoint.transform);
         Transform[] path = PathObject.GetComponentsInChildren<Transform>();
-        return path[Mathf.Clamp(index - 1, 0, path.Length)].gameObject;
+        return path[Mathf.Clamp(index - 1, 0, path.Length - 1)].gameObject;
     }
 	
     public void BeginRace()
@@ -109,13 +109,13 @@ public class RaceManager : MonoBehaviour
 
     public bool IsWrongWay(GameObject Vehicle)
     {
-        /*if (Vehicle.rigidbody.velocity.magnitude > 10)
+        if (Vehicle.rigidbody.velocity.magnitude > 10)
         {
             if (Vector3.Distance(Vehicle.transform.position, Checkpoints[Vehicle].transform.position) > MaxDistFromCheckpoint)
             {
                 return true;
             }
-        }*/
+        }
 
         return false;
     }
