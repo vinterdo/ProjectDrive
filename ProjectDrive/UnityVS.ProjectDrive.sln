@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+Microsoft Visual Studio Solution File, Format Version 11.0
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.ProjectDrive.CSharp", "UnityVS.ProjectDrive.CSharp.csproj", "{FA30E694-FABA-0439-0EC4-F0F64EBE6F43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.ProjectDrive.CSharp.Editor", "UnityVS.ProjectDrive.CSharp.Editor.csproj", "{6B512CFB-A12C-C532-646E-E875871C2A18}"
