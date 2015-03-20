@@ -84,7 +84,7 @@ public class VehicleAIController : MonoBehaviour
         Vector3 diff1 = (Waypoints[TranslateId(FindClosestWaypointId(), 0)].position - Waypoints[TranslateId(FindClosestWaypointId(), -1)].position).normalized;
         Vector3 diff2 = (Waypoints[TranslateId(FindClosestWaypointId(), 1)].position - Waypoints[TranslateId(FindClosestWaypointId(), 0)].position).normalized;
 
-        Debug.Log(Vector3.Angle(diff2, diff1));
+        //Debug.Log(Vector3.Angle(diff2, diff1));
 
         return Vector3.Angle(diff2, diff1);
     }

@@ -72,6 +72,7 @@
     <Compile Include="Assets\EasyRoads3D\scripts\sideObjectScript.cs" />
     <Compile Include="Assets\Scripts\AIPath.cs" />
     <Compile Include="Assets\Scripts\CameraPositioner.cs" />
+    <Compile Include="Assets\Scripts\GuiManager.cs" />
     <Compile Include="Assets\Scripts\Jump.cs" />
     <Compile Include="Assets\Scripts\RaceManager.cs" />
     <Compile Include="Assets\Scripts\Vehicle.cs" />

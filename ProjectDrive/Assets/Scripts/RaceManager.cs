@@ -14,7 +14,12 @@ public class RaceManager : MonoBehaviour
 
 	void Start () 
     {
-	
+        Checkpoints = new Dictionary<GameObject, GameObject>();
+        GameObject FirstCheckpoint = PathObject.GetComponentsInChildren<Transform>()[0].gameObject;
+        foreach (GameObject V in Vehicles)
+        {
+            Checkpoints.Add(V, FirstCheckpoint); 
+        }
 	}
 	
 	// Update is called once per frame
@@ -25,14 +30,51 @@ public class RaceManager : MonoBehaviour
             if(Vector3.Magnitude(Vehicles[i].transform.position - GetNextCheckpoint(Checkpoints[Vehicles[i]]).transform.position) < MaxDistFromCheckpoint)
 			{
 				Checkpoints[Vehicles[i]] = GetNextCheckpoint(Checkpoints[Vehicles[i]]);
-				Debug.Log("switched checpoint");
+				//Debug.Log("switched checpoint");
 			}
         }
+
+        Debug.Log(GetVehiclePos(Vehicles[0]));
 	}
 
     public int GetVehiclePos(GameObject Vehicle)
     {
-        return 0;
+        Transform[] path = PathObject.GetComponentsInChildren<Transform>();
+        int pos = Vehicles.Count;
+        
+        for (int i = 0; i < path.Length; i++)
+        {
+            List<GameObject> AtCheckpoint = new List<GameObject>();
+
+            foreach (GameObject V in Vehicles)
+            {
+                if (Checkpoints[V] == path[i].gameObject)
+                {
+                    AtCheckpoint.Add(V);
+                }
+            }
+
+            if (AtCheckpoint.Contains(Vehicle))
+            {
+                float VehicleDist = Vector3.Distance(Vehicle.transform.position, path[i].position);
+                foreach (GameObject V in AtCheckpoint)
+                {
+                    if (Vector3.Distance(V.transform.position, path[i].position) > VehicleDist)
+                    {
+                        pos--;
+                    }
+                }
+
+                return pos;
+            }
+            else
+            {
+                pos -= AtCheckpoint.Count;
+            }
+
+        }
+        
+        return pos;
     }
 	
 	public GameObject GetNextCheckpoint(GameObject Checkpoint)

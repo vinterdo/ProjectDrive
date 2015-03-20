@@ -83,7 +83,7 @@ public class Vehicle : MonoBehaviour
     {
         Vector3 Inversed = Quaternion.Inverse(transform.rotation) * rigidbody.velocity;
 
-        Debug.DrawLine(transform.position, transform.position + rigidbody.rotation * new Vector3(Inversed.x, 0, 0), Color.red);
+        //Debug.DrawLine(transform.position, transform.position + rigidbody.rotation * new Vector3(Inversed.x, 0, 0), Color.red);
 
         rigidbody.AddForce(rigidbody.rotation * new Vector3(Inversed.x, 0, 0) * -Traction);
     }
