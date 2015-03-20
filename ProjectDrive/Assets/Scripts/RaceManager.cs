@@ -27,14 +27,22 @@ public class RaceManager : MonoBehaviour
     {
         for(int i=0; i < Vehicles.Count; i++)
         {
-            if(Vector3.Magnitude(Vehicles[i].transform.position - GetNextCheckpoint(Checkpoints[Vehicles[i]]).transform.position) < MaxDistFromCheckpoint)
+            if (Vector3.Magnitude(Vehicles[i].transform.position - GetNextCheckpoint(Checkpoints[Vehicles[i]]).transform.position) < CheckpointDist)
 			{
 				Checkpoints[Vehicles[i]] = GetNextCheckpoint(Checkpoints[Vehicles[i]]);
 				//Debug.Log("switched checpoint");
 			}
         }
 
-        Debug.Log(GetVehiclePos(Vehicles[0]));
+
+        foreach (GameObject V in Vehicles)
+        {
+            if (Vector3.Distance(V.transform.position, Checkpoints[V].transform.position) > MaxDistFromCheckpoint)
+            {
+                V.transform.position = Checkpoints[V].transform.position;
+            }
+        }
+        //Debug.Log(GetVehiclePos(Vehicles[0]));
 	}
 
     public int GetVehiclePos(GameObject Vehicle)
@@ -83,6 +91,13 @@ public class RaceManager : MonoBehaviour
 		Transform[] path = PathObject.GetComponentsInChildren<Transform>();
 		return path[Mathf.Clamp(index + 1,0, path.Length)].gameObject;
 	}
+
+    public GameObject GetPrivCheckpoint(GameObject Checkpoint)
+    {
+        int index = Array.IndexOf(PathObject.GetComponentsInChildren<Transform>(), Checkpoint.transform);
+        Transform[] path = PathObject.GetComponentsInChildren<Transform>();
+        return path[Mathf.Clamp(index - 1, 0, path.Length)].gameObject;
+    }
 	
     public void BeginRace()
     {
@@ -90,5 +105,18 @@ public class RaceManager : MonoBehaviour
 
     public void EndRace()
     {
+    }
+
+    public bool IsWrongWay(GameObject Vehicle)
+    {
+        /*if (Vehicle.rigidbody.velocity.magnitude > 10)
+        {
+            if (Vector3.Distance(Vehicle.transform.position, Checkpoints[Vehicle].transform.position) > MaxDistFromCheckpoint)
+            {
+                return true;
+            }
+        }*/
+
+        return false;
     }
 }
