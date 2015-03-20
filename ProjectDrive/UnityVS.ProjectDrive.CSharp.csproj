@@ -7,14 +7,16 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FA30E694-FABA-0439-0EC4-F0F64EBE6F43}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>4.6.0b21</UnityVersion>
@@ -70,6 +72,7 @@
     <Compile Include="Assets\EasyRoads3D\scripts\sideObjectScript.cs" />
     <Compile Include="Assets\Scripts\AIPath.cs" />
     <Compile Include="Assets\Scripts\CameraPositioner.cs" />
+    <Compile Include="Assets\Scripts\Jump.cs" />
     <Compile Include="Assets\Scripts\RaceManager.cs" />
     <Compile Include="Assets\Scripts\Vehicle.cs" />
     <Compile Include="Assets\Scripts\VehicleAIController.cs" />
