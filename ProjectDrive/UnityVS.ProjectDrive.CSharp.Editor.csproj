@@ -91,6 +91,7 @@
     <Compile Include="Assets\EasyRoads3D\Editor\ProceduralObjectsEditor.cs" />
     <Compile Include="Assets\EasyRoads3D\Editor\SideObjectImporter.cs" />
     <Compile Include="Assets\EasyRoads3D\Editor\SideObjectInit.cs" />
+    <Compile Include="Assets\Editor\AIPathEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\EasyRoads3D\_Readme.txt" />
