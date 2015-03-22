@@ -80,7 +80,7 @@ public class AIPathEditor : Editor
                     if (path.empty)
                     {
                         GameObject g = (GameObject)Instantiate(path.empty, hitInfo.point, Quaternion.identity);
-                        g.name = "Waypoint" + path.count++;
+                        g.name = "Waypoint";
                         g.transform.parent = path.transform;
                         EditorUtility.SetDirty(g);
                         HandleUtility.Repaint();
