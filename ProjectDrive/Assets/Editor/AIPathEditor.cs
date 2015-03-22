@@ -6,6 +6,8 @@ using UnityEditor;
 public class AIPathEditor : Editor
 {
     bool edit = false;
+    int ID = "AIPathEditor".GetHashCode();
+
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -48,11 +50,13 @@ public class AIPathEditor : Editor
         if(GUILayout.Button("Edit Mode"))
         {
             edit = !edit;
+            if (GUIUtility.hotControl != 0) GUIUtility.hotControl = 0;
         }
 
         if(Event.current.shift)
         {
             edit = !edit;
+            if (GUIUtility.hotControl != 0) GUIUtility.hotControl = 0;
         }
     }
 
@@ -61,9 +65,13 @@ public class AIPathEditor : Editor
         AIPath path = (AIPath)target;
         if (edit)
         {
-            if (Event.current.type == EventType.MouseUp)
+            if (Event.current.type == EventType.Layout)
             {
-                GUIUtility.hotControl = this.GetHashCode();
+                HandleUtility.AddDefaultControl(ID);
+            }
+
+            if (Event.current.type == EventType.MouseDown && HandleUtility.nearestControl == ID)
+            {
                 Ray worldRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
                 RaycastHit hitInfo;
                 // Shoot this ray. check in a distance of 10000.
@@ -75,13 +83,13 @@ public class AIPathEditor : Editor
                         g.name = "Waypoint" + path.count++;
                         g.transform.parent = path.transform;
                         EditorUtility.SetDirty(g);
+                        HandleUtility.Repaint();
                     }
                     else
                     {
                         Debug.LogError("There's no 'empty' object !");
                     }
                 }
-                GUIUtility.hotControl = 0;
             }
             Event.current.Use();
         }
