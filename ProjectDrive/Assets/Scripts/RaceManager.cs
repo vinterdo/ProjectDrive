@@ -49,7 +49,7 @@ public class RaceManager : MonoBehaviour
     {
         Transform[] path = PathObject.GetComponentsInChildren<Transform>();
         int pos = Vehicles.Count;
-        
+
         for (int i = 0; i < path.Length; i++)
         {
             List<GameObject> AtCheckpoint = new List<GameObject>();
@@ -81,7 +81,7 @@ public class RaceManager : MonoBehaviour
             }
 
         }
-        
+
         return pos;
     }
 	
