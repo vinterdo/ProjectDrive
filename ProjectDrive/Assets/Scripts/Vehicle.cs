@@ -9,8 +9,31 @@ public class Vehicle : MonoBehaviour
     public float TurningForce = 1;
     public float Traction = 0.1f;
 
-    public float ControllForward = 0;
-    public float ControllSides = 0;
+    float _ControllForward = 0, _ControllSides = 0;
+    public float ControllForward
+    {
+        get
+        {
+            return _ControllForward;
+        }
+        set
+        {
+            if (!Lock) _ControllForward = value;
+        }
+    }
+    public float ControllSides
+    {
+        get
+        {
+            return _ControllSides ;
+        }
+        set
+        {
+            if (!Lock) _ControllSides = value;
+        }
+    }
+
+    public bool Lock = false;
 
 	void Start () 
     {
