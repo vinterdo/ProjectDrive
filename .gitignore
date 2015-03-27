@@ -36,3 +36,6 @@ Icon?
 ehthumbs.db
 Thumbs.db
 ProjectDrive/Library/assetDatabase3
+*.log
+*.jrs
+*.ide
