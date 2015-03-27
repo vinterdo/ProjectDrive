@@ -26,6 +26,12 @@ public class RaceManager : MonoBehaviour
     public GameObject OverwievCamera;
     public GameObject PlayerCamera;
 
+    public Vector3 OverviewCenter = Vector3.zero;
+    public float OverviewRadius = 1000;
+    public float OverviewHeight = 1000;
+    public float OverviewSpeed = 1;
+    
+
 	void Start () 
     {
         Checkpoints = new Dictionary<GameObject, GameObject>();
@@ -63,7 +69,11 @@ public class RaceManager : MonoBehaviour
 
                 break;
             case State.Overview:
-                
+
+                OverwievCamera.transform.position = OverviewCenter + new Vector3(Mathf.Sin(Time.realtimeSinceStartup * OverviewSpeed) * OverviewRadius, OverviewHeight, Mathf.Cos(Time.realtimeSinceStartup * OverviewSpeed) * OverviewRadius);
+                OverwievCamera.transform.LookAt(OverviewCenter);
+
+
                 if(Input.GetKey(KeyCode.Space))
                 {
                     CurrentState = State.Countdown;
