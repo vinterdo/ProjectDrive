@@ -31,6 +31,8 @@ public class RaceManager : MonoBehaviour
     public float OverviewSpeed = 1;
 
     public List<GameObject> FinishedVehicles;
+
+    public float RaceStart;
     
 
 	void Start () 
@@ -91,6 +93,8 @@ public class RaceManager : MonoBehaviour
         {
             CurrentCountdownTime = 0;
             CurrentState = State.Race;
+
+            RaceStart = Time.timeSinceLevelLoad;
 
             foreach (GameObject V in Vehicles)
             {
