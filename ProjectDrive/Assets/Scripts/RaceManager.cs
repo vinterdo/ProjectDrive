@@ -12,26 +12,80 @@ public class RaceManager : MonoBehaviour
 	
 	public Dictionary<GameObject, GameObject> Checkpoints; // Checkpoints<Vehicle> -> Checkpoint
 
+    public enum State
+    {
+        Overview,
+        Countdown,
+        Race,
+        Finish
+    }
+
+    public State CurrentState;
+    public float MaxCountdownTime = 3;
+    public float CurrentCountdownTime = 0;
+    public GameObject OverwievCamera;
+    public GameObject PlayerCamera;
+
 	void Start () 
     {
         Checkpoints = new Dictionary<GameObject, GameObject>();
         GameObject FirstCheckpoint = PathObject.GetComponentsInChildren<Transform>()[0].gameObject;
         foreach (GameObject V in Vehicles)
         {
-            Checkpoints.Add(V, FirstCheckpoint); 
+            Checkpoints.Add(V, FirstCheckpoint);
+            V.GetComponent<Vehicle>().Lock = true;
         }
+
+        OverwievCamera.SetActive(true);
+        PlayerCamera.SetActive(false);
+        CurrentState = State.Overview;
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update ()
     {
-        for(int i=0; i < Vehicles.Count; i++)
+        switch (CurrentState)
+        {
+            case State.Countdown:
+                CurrentCountdownTime += Time.deltaTime;
+                if(CurrentCountdownTime > MaxCountdownTime)
+                {
+                    CurrentCountdownTime = 0;
+                    CurrentState = State.Race;
+
+                    foreach(GameObject V in Vehicles)
+                    {
+                        V.GetComponent<Vehicle>().Lock = false;
+                    }
+                }
+                break;
+            case State.Finish:
+
+                break;
+            case State.Overview:
+                
+                if(Input.GetKey(KeyCode.Space))
+                {
+                    CurrentState = State.Countdown;
+                    OverwievCamera.SetActive(false);
+                    PlayerCamera.SetActive(true);
+                }
+                break;
+            case State.Race:
+                RaceUpdate();
+                break;
+        }
+    }
+
+    private void RaceUpdate()
+    {
+        for (int i = 0; i < Vehicles.Count; i++)
         {
             if (Vector3.Magnitude(Vehicles[i].transform.position - GetNextCheckpoint(Checkpoints[Vehicles[i]]).transform.position) < CheckpointDist)
-			{
-				Checkpoints[Vehicles[i]] = GetNextCheckpoint(Checkpoints[Vehicles[i]]);
-				//Debug.Log("switched checpoint");
-			}
+            {
+                Checkpoints[Vehicles[i]] = GetNextCheckpoint(Checkpoints[Vehicles[i]]);
+                //Debug.Log("switched checpoint");
+            }
         }
 
 
@@ -43,7 +97,7 @@ public class RaceManager : MonoBehaviour
             }
         }
         //Debug.Log(GetVehiclePos(Vehicles[0]));
-	}
+    }
 
     public int GetVehiclePos(GameObject Vehicle)
     {

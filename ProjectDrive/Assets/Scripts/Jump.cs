@@ -26,22 +26,25 @@ public class Jump : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Jump") > 0)
+        if (!gameObject.GetComponent<Vehicle>().Lock)
         {
-            _timeLeft = ForceTime;
-             
-        }
+            if (Input.GetAxis("Jump") > 0)
+            {
+                _timeLeft = ForceTime;
 
-        if (_timeLeft > 0)
-        {
-            V.ForceValue = JumpForce;
-            V.MaxRayDist = JumpRayDist;
-            _timeLeft -= Time.deltaTime;
-        }
-        else
-        {
-            V.ForceValue = IdleForce;
-            V.MaxRayDist = IdleRayDist;
+            }
+
+            if (_timeLeft > 0)
+            {
+                V.ForceValue = JumpForce;
+                V.MaxRayDist = JumpRayDist;
+                _timeLeft -= Time.deltaTime;
+            }
+            else
+            {
+                V.ForceValue = IdleForce;
+                V.MaxRayDist = IdleRayDist;
+            }
         }
     }
 
