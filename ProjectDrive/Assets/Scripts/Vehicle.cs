@@ -39,6 +39,19 @@ public class Vehicle : MonoBehaviour
     {
         //rigidbody.centerOfMass = new Vector3(0, -1, 0);
 	}
+
+    Vector3 oldVelocity;
+    void Update()
+    {
+        if(Lock)
+        {
+            rigidbody.useGravity = false;
+        }
+        else
+        {
+            rigidbody.useGravity = true;
+        }
+    }
 	
 	void FixedUpdate () 
     {

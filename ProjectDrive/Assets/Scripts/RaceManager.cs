@@ -8,7 +8,6 @@ public class RaceManager : MonoBehaviour
     public List<GameObject> Vehicles;
     public float CheckpointDist;
     public float MaxDistFromCheckpoint;
-    public GameObject Finish;
 	
 	public Dictionary<GameObject, GameObject> Checkpoints; // Checkpoints<Vehicle> -> Checkpoint
 
@@ -27,9 +26,11 @@ public class RaceManager : MonoBehaviour
     public GameObject PlayerCamera;
 
     public Vector3 OverviewCenter = Vector3.zero;
-    public float OverviewRadius = 1000;
-    public float OverviewHeight = 1000;
+    public float OverviewRadius = 500;
+    public float OverviewHeight = 500;
     public float OverviewSpeed = 1;
+
+    public List<GameObject> FinishedVehicles;
     
 
 	void Start () 
@@ -45,6 +46,8 @@ public class RaceManager : MonoBehaviour
         OverwievCamera.SetActive(true);
         PlayerCamera.SetActive(false);
         CurrentState = State.Overview;
+
+        FinishedVehicles = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
@@ -53,37 +56,46 @@ public class RaceManager : MonoBehaviour
         switch (CurrentState)
         {
             case State.Countdown:
-                CurrentCountdownTime += Time.deltaTime;
-                if(CurrentCountdownTime > MaxCountdownTime)
-                {
-                    CurrentCountdownTime = 0;
-                    CurrentState = State.Race;
-
-                    foreach(GameObject V in Vehicles)
-                    {
-                        V.GetComponent<Vehicle>().Lock = false;
-                    }
-                }
+                CountdownUpdate();
                 break;
             case State.Finish:
-
+                if (Input.GetKey(KeyCode.Space)) Application.LoadLevel(Application.loadedLevel);
                 break;
             case State.Overview:
-
-                OverwievCamera.transform.position = OverviewCenter + new Vector3(Mathf.Sin(Time.realtimeSinceStartup * OverviewSpeed) * OverviewRadius, OverviewHeight, Mathf.Cos(Time.realtimeSinceStartup * OverviewSpeed) * OverviewRadius);
-                OverwievCamera.transform.LookAt(OverviewCenter);
-
-
-                if(Input.GetKey(KeyCode.Space))
-                {
-                    CurrentState = State.Countdown;
-                    OverwievCamera.SetActive(false);
-                    PlayerCamera.SetActive(true);
-                }
+                OverwievUpdate();
                 break;
             case State.Race:
                 RaceUpdate();
                 break;
+        }
+    }
+
+    private void OverwievUpdate()
+    {
+        OverwievCamera.transform.position = OverviewCenter + new Vector3(Mathf.Sin(Time.realtimeSinceStartup * OverviewSpeed) * OverviewRadius, OverviewHeight, Mathf.Cos(Time.realtimeSinceStartup * OverviewSpeed) * OverviewRadius);
+        OverwievCamera.transform.LookAt(OverviewCenter);
+
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            CurrentState = State.Countdown;
+            OverwievCamera.SetActive(false);
+            PlayerCamera.SetActive(true);
+        }
+    }
+
+    private void CountdownUpdate()
+    {
+        CurrentCountdownTime += Time.deltaTime;
+        if (CurrentCountdownTime > MaxCountdownTime)
+        {
+            CurrentCountdownTime = 0;
+            CurrentState = State.Race;
+
+            foreach (GameObject V in Vehicles)
+            {
+                V.GetComponent<Vehicle>().Lock = false;
+            }
         }
     }
 
@@ -107,6 +119,11 @@ public class RaceManager : MonoBehaviour
             }
         }
         //Debug.Log(GetVehiclePos(Vehicles[0]));
+
+        if(FinishedVehicles.Count == Vehicles.Count)
+        {
+            CurrentState = State.Finish;
+        }
     }
 
     public int GetVehiclePos(GameObject Vehicle)
@@ -181,6 +198,15 @@ public class RaceManager : MonoBehaviour
             }
         }
 
+        return false;
+    }
+
+    public bool IsOnLastCheckpoint(GameObject Vehicle)
+    {
+        GameObject CheckPoint = Checkpoints[Vehicle];
+
+        Transform[] path = PathObject.GetComponentsInChildren<Transform>();
+        if (path[path.Length - 1] == CheckPoint.transform) return true;
         return false;
     }
 }
