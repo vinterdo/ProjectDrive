@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 29b14b13691a7804bb9258f6915b178c
+guid: 0faa032601cfa5448aa11a44b6f7371b
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -9,11 +9,12 @@ ModelImporter:
     400002: //RootNode
     2300000: markerObject
     3300000: markerObject
-    4300000: markerObject
-    9500000: //RootNode
+    4300000: Cylinder01
+    4300002: markerObject
+    11100000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 3
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -44,9 +45,9 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
   tangentSpace:
-    normalSmoothAngle: 60
+    normalSmoothAngle: 92
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0
@@ -62,6 +63,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 
